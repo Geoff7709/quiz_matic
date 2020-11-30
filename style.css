@@ -37,3 +37,14 @@ p {
     font-size: large;
     text-align: center;
 }
+
+.question {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    line-height: 27px;
+    color: blue;
+}
+
+#question-box {
+    max-width: 500px;
+}
