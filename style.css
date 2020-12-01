@@ -6,6 +6,10 @@ h1 {
     background-color: royalblue;
 }
 
+.hide {
+    display: none;
+}
+
 #stat-bar {
     background-color: darkblue;
     color: rgb(43, 11, 1);
@@ -27,15 +31,15 @@ p {
 }
 
 #start-button {
-    width: auto;
-    border: solid, 5px, black;
-    background-color: green;
-    color: black;
-    border-radius: 5px;
-    padding: 10px;
     font-weight: bold;
     font-size: large;
     text-align: center;
+    
+}
+
+button {
+    margin: 10px;
+    color: black;
 }
 
 .question {
@@ -47,4 +51,6 @@ p {
 
 #question-box {
     max-width: 500px;
+    margin-top: 20px;
+    border: 5px;
 }

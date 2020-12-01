@@ -30,30 +30,33 @@
             <p>Welcome to Quiz-Matic! This little game will test your knowledge of some basic HTML, CSS, and JavaScript concepts. You will have sixty seconds to play the game. Answer as many questions as you can. Correct answers are worth ten points, but beware: incorrect answers will cost you ten seconds!</p>
             <p id='p2'>Also be on the lookout for bonus questions: if you pass, you're only out the time; get it right and you get bonus points plus a little time on the clock; get it wrong and you lose fifteen seconds...</p>
         </div>
-        <div class='row justify-content-center'>
-            <button id='start-button'>Start</button>
+        <div class='row'>
+            <button type="button" class="btn btn-danger btn-lg btn-block" id='start-button'>Start</button>
         </div>
     </div>
 
-    <div class='container border border-dark rounded' id='question-box'>
+    <div class='container border border-dark rounded hide' id='question-box'>
         <div class='row justify-content-center question'>
             Question
         </div>
         <div class='row'>
             <div class='col-md-6'>
-                <button id='answer-a'>Answer A</button>
+                <button id='answer-a'class='btn btn-primary'>Answer A</button>
             </div>
             <div class='col-md-6'>
-                <button id='answer-b'>Answer C</button>
+                <button id='answer-b' class='btn btn-primary'>Answer B</button>
             </div>
         </div>
         <div class='row'>
             <div class='col-md-6'>
-                <button id='answer-c'>Answer C</button>
+                <button id='answer-c' class='btn btn-primary'>Answer C</button>
             </div>
             <div class='col-md-6'>
-                <button id='answer-d'>Answer D</button>
+                <button id='answer-d' class='btn btn-primary'>Answer D</button>
             </div>
+        </div>
+        <div class='row'>
+            <button id='pass' class='btn btn-primary btn-lg  btn-block hide'>Pass</button>
         </div>
     </div>
 
