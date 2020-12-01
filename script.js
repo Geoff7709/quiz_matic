@@ -1,5 +1,28 @@
 // Create Quiz-Matic game
-// Declare variables for questions/answers
+// Declare variables for questions/answers/buttons etc.
+var startBtn = document.getElementById('start-button');
+
+var timer = document.getElementById('timer');
+
+var seconds = 60;
+
+var hiScore = document.getElementById('hi-score');
+
+var yourScore = document.getElementById('your-score');
+
+function startTimer() {
+    timer.innerHTML = seconds + ' seconds';
+    if (seconds > 0) {
+        seconds--;
+    }}
+function startGame() {
+    document.getElementById('start-tab').setAttribute('class', 'hide');
+    document.getElementById('question-box').removeAttribute('class','hide');
+    setInterval(startTimer, 1000);
+    hiScore.innerText = 'Hi Score: ' + 'none';
+    yourScore.innerText = 'Your score: ' + 0;
+}
+startBtn.addEventListener('click', startGame)
 // Set up timer set at 60 seconds for quiz
 // Set up score display
 // Question display block will have a simple statement of rules until start
