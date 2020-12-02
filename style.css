@@ -1,3 +1,15 @@
+.wrong {
+    background-color: crimson;
+}
+
+.correct {
+    background-color: darkgreen;
+}
+
+.neutral {
+    background-color: white;
+}
+
 h1 {
     text-align: center;
     color: red;
@@ -42,7 +54,7 @@ button {
     color: black;
 }
 
-.question {
+#question {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
     line-height: 27px;
