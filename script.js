@@ -3,6 +3,7 @@
 var questions = [
     {question: 'What does ‘HTML’ stand for?', 
     bonus: false,
+    order: 1,
     answer: [
         {text: 'Hyper-Text Markup Language', correct: true},
         {text: 'Help Time Marketing Language', correct: false},
@@ -11,6 +12,7 @@ var questions = [
     ]},  
     {question: 'What is the function of CSS in developing an application?',
     bonus: false,
+    order: 2,
     answer: [
         {text: 'It manipulates elements in the browser for user interface', correct: false},
         {text: 'Provides a basis for universal translation in the web', correct: false},
@@ -19,6 +21,7 @@ var questions = [
     ]},
     {question: 'What year was JavaScript first released?',
     bonus: false,
+    order: 3,
     answer: [
         {text: '1992', correct: false},
         {text: '2005', correct: false},
@@ -27,6 +30,7 @@ var questions = [
     ]},
     {question: 'What is the purpose of a function in JavaScript?',
     bonus: false,
+    order: 4,
     answer: [
         {text: 'It adds, subtracts, multiplies, or divides numbers', correct: true},
         {text: 'It helps navigate through a document', correct: false},
@@ -35,6 +39,7 @@ var questions = [
     ]},
     {question: 'Which of the following is NOT an API?',
     bonus: false,
+    order: 4,
     answer: [
         {text: 'DOM', correct: false},
         {text: 'SEC', correct: true},
@@ -43,6 +48,7 @@ var questions = [
     ]},
     {question: 'Which of the following is an array method?',
     bonus: false,
+    order: 6,
     answer: [
         {text: 'Catch', correct: false},
         {text: 'Splint', correct: false},
@@ -51,6 +57,7 @@ var questions = [
     ]},
     {question: 'What is the proper HTML tag to introduce or link a JavaScript file?',
     bonus: false,
+    order: 7,
     answer: [
         {text: '<java>', correct: false},
         {text: '<jscript>', correct: false},
@@ -59,6 +66,7 @@ var questions = [
     ]},
     {question: 'What are the three statements that must be included in a ‘for’ loop with no breaks in the following function?',
     bonus: false,
+    order: 8,
     answer: [
         {text: 'Variable, limit, counter', correct: true},
         {text: 'Function, limit, operator', correct: false},
@@ -67,6 +75,7 @@ var questions = [
     ]},
     {question: 'What is the function of ‘while’ in JavaScript?',
     bonus: false,
+    order: 9,
     answer: [
         {text: 'Provides a timed break in the code', correct: false},
         {text: 'A loop that executes when a given statement is true', correct: true},
@@ -75,6 +84,7 @@ var questions = [
     ]},
     {question: 'Which of the following is a primitive data type in JavaScript?',
     bonus: false,
+    order: 10,
     answer: [
         {text: 'String', correct: false},
         {text: 'Number', correct: false},
@@ -83,6 +93,7 @@ var questions = [
     ]},
     {question: 'What is the expected output in the page console from the following: var x = ‘Bananas’ + 20 + 8; console.log\(x\)?',
     bonus: false,
+    order: 11,
     answer: [
         {text: 'Bananas208', correct: true},
         {text: 'Bananas28', correct: false},
@@ -91,6 +102,7 @@ var questions = [
     ]},
     {question: 'What is recursion?',
     bonus: false,
+    order: 12,
     answer: [
         {text: 'The act of a function calling itself', correct: true},
         {text: 'Changing font families to better define different types of code', correct: false},
@@ -99,12 +111,14 @@ var questions = [
     ]},
     {question: 'True or false: it is possible for a function to contain another function.',
     bonus: false,
+    order: 13,
     answer: [
         {text: 'True', correct: true},
         {text: 'False', correct: false},
     ]},
     {question: 'What does CSS stand for?',
     bonus: false,
+    order: 14,
     answer: [
         {text: 'Coastal Standard Second', correct: false},
         {text: 'Coded Stamping Size', correct: false},
@@ -113,12 +127,14 @@ var questions = [
     ]},
     {question: 'True or false: booleans and strings are interchangeable data types.',
     bonus: false,
+    order: 15,
     answer: [
         {text: 'False', correct: true},
         {text: 'True', correct: false},
     ]},
     {question: 'How are arrays used in JavaScript?',
     bonus: false,
+    order: 16,
     answer: [
         {text: 'To randomly choose between a variety of functions', correct: false},
         {text: 'To apply methods to a function', correct: false},
@@ -127,6 +143,7 @@ var questions = [
     ]},
     {question: 'What is the average airspeed of an unladen swallow?',
     bonus: true,
+    order: 17,
     answer: [
         {text: 'African or European?', correct: true},
         {text: 'I don’t know', correct: false},
@@ -135,6 +152,7 @@ var questions = [
     ]},
     {question: ' What is the only animal with four knees?',
     bonus: true,
+    order: 18,
     answer: [
         {text: 'Lemur', correct: false},
         {text: 'Duckbill Platypus', correct: false},
@@ -143,6 +161,7 @@ var questions = [
     ]},
     {question: 'What is the weight of the average humpback whale heart?',
     bonus: true,
+    order: 19,
     answer: [
         {text: '430 lbs', correct: true},
         {text: '50 lbs', correct: false},
@@ -151,6 +170,7 @@ var questions = [
     ]},
     {question: 'What is the national animal of Scottland?',
     bonus: true,
+    order: 20,
     answer: [
         {text: 'Badger', correct: false},
         {text: 'Red Deer', correct: false},
@@ -158,12 +178,13 @@ var questions = [
         {text: 'Unicorn', correct: true}
     ]},  
 ]
+var usedQuestions = []
 
 var startBtn = document.getElementById('start-button');
 
 var questionDisplayed = document.getElementById('question');
 
-var answerBtn = document.getElementById('answer-button');
+var answerDiv = document.getElementById('answers');
 
 var passBtn = document.getElementById('pass')
 
@@ -182,19 +203,44 @@ function startTimer() {
     }
 }
 
+function checkAnswer(event) {
+    if (event.target.matches('button')) {
+        console.log('geoff')
+        // if (this.value === true) {
+        //     yourScore += 10;
+        //     if (!usedQuestions.length === 20 && timer > 0) {
+        //         renderQuestion()
+        //     }
+        // } else {
+        //     timer -= 10;
+        //     if (!usedQuestions.length === 20 && timer > 0) {
+        //         renderQuestion()
+        //     }
+        // }
+    }
+}
+
 function renderQuestion() {
     document.querySelector('body').setAttribute('class', 'neutral');
     questionDisplayed.innerText = '';
-    var q = questions[Math.floor(Math.random() * questions.length)]
-    questionDisplayed.innerText = q.question;
-    var ans = q.answer
-    for (var i = 0; i <= ans.length - 1; i++) {
-        var pTag = document.createElement('p');
-        pTag.innerText = ans[i].text;
-        for (var i = 0; i < ans.length; i++) {
-        answerBtn[i].appendChild(pTag);
-        } 
-    }    
+    answerDiv.innerHTML = '';
+    var q = questions[Math.floor(Math.random() * questions.length)];
+    if (!usedQuestions.includes(q.order)) {
+        questionDisplayed.innerText = q.question;
+        usedQuestions.push(q.order)
+        var ans = q.answer;
+        for (var i = 0; i <= ans.length - 1; i++) {
+            var ansBtn = document.createElement('button')
+            ansBtn.innerText = ans[i].text;
+            ansBtn.setAttribute('class', 'btn');
+            ansBtn.setAttribute('class', 'btn-primary');
+            ansBtn.setAttribute('value', ans[i].correct);
+            answerDiv.addEventListener('click', checkAnswer)
+            answerDiv.appendChild(ansBtn);
+        }    
+    } else {
+        renderQuestion()
+    }
 }
 
 function startGame() {

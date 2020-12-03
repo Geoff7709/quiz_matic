@@ -52,6 +52,13 @@ p {
 button {
     margin: 10px;
     color: black;
+    display: block;
+}
+
+.stretchColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #question {
