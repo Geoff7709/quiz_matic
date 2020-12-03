@@ -196,32 +196,33 @@ var hiScore = document.getElementById('hi-score');
 
 var yourScore = document.getElementById('your-score');
 
+var score = 0;
+
 function startTimer() {
     timer.innerHTML = seconds + ' seconds';
     if (seconds > 0) {
         seconds--;
     }
-}
-
-function checkAnswer(event) {
-    if (event.target.matches('button')) {
-        console.log('geoff')
-        // if (this.value === true) {
-        //     yourScore += 10;
-        //     if (!usedQuestions.length === 20 && timer > 0) {
-        //         renderQuestion()
-        //     }
-        // } else {
-        //     timer -= 10;
-        //     if (!usedQuestions.length === 20 && timer > 0) {
-        //         renderQuestion()
-        //     }
-        // }
+    if (seconds <= 0) {
+        clearInterval(startTimer);
+        alert('GAME OVER');
+        // endGame();
     }
 }
 
+function startGame() {
+    document.getElementById('start-tab').setAttribute('class', 'hide');
+    document.getElementById('question-box').removeAttribute('class','hide');
+    setInterval(startTimer, 1000);
+    hiScore.innerText = 'none';
+    yourScore.innerText = score;
+    renderQuestion()
+}
+
+startBtn.addEventListener('click', startGame)
+
 function renderQuestion() {
-    document.querySelector('body').setAttribute('class', 'neutral');
+    // document.querySelector('body').setAttribute('class', 'neutral');
     questionDisplayed.innerText = '';
     answerDiv.innerHTML = '';
     var q = questions[Math.floor(Math.random() * questions.length)];
@@ -243,21 +244,35 @@ function renderQuestion() {
     }
 }
 
-function startGame() {
-    document.getElementById('start-tab').setAttribute('class', 'hide');
-    document.getElementById('question-box').removeAttribute('class','hide');
-    setInterval(startTimer, 1000);
-    hiScore.innerText = 'Hi Score: ' + 'none';
-    yourScore.innerText = 'Your score: ' + 0;
-    renderQuestion()
+function checkAnswer(event) {
+    if (event.target.matches('button')) {
+        var choice = event.target.value;
+        // console.log(typeof event.target.value)
+        if (choice == 'true') {
+            // console.log('test')
+            // document.querySelector('body').setAttribute('class', 'correct');
+            yourScore.innerText = score += 10;
+            // if (!usedQuestions.length === 20 && timer > 0) {
+                renderQuestion()
+            // }
+        } else {
+            seconds -= 10;
+        //     if (!usedQuestions.length === 20 && timer > 0) {
+                renderQuestion()
+        //     }
+        }
+    }
+}
+
+function endGame() {
+    
 }
 
 
-startBtn.addEventListener('click', startGame)
 // Set up timer set at 60 seconds for quiz
 // Set up score display
 // Question display block will have a simple statement of rules until start
 // Start play includes start timer and display first question - will be randomly selected from bank of twenty questions plus four bonus questions
 // Player selects answer with click function - if correct add to score. Each question will be worth ten points. Else answer is wrong, time is subtracted from amount.
 // Conditions for bonus - can pass and only lose time spent - if correct you gain twenty points plus fifteen seconds on the clock. Else double time is removed from timer.
-// Timer reaches zero game ends, player is asked for initials to save score to "High Scores" list
+// Timer reaches zero game ends, player is asked for initials to save score to high scores list
