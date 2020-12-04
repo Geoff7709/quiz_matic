@@ -273,8 +273,9 @@ function endGame() {
 }
 recordYourScore.addEventListener('click', function(event){
     event.preventDefault();
-    console.log(playerInitials.innerText)
-    // sessionStorage.setItem('final', )
+    var finalScore = JSON.stringify(score);
+    // console.log(typeof score)
+    sessionStorage.setItem('final', playerInitials.value + ': ' + finalScore)
 })
 
 // function highScores(event) {
