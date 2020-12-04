@@ -196,24 +196,28 @@ var hiScore = document.getElementById('hi-score');
 
 var yourScore = document.getElementById('your-score');
 
+var recordYourScore = document.getElementById('submit-score')
+
+var playerInitials = document.getElementById('player-initials')
+
 var score = 0;
 
 function startTimer() {
-    timer.innerHTML = seconds + ' seconds';
-    if (seconds > 0) {
+    var timer = setInterval(function(){
         seconds--;
-    }
-    if (seconds <= 0) {
-        clearInterval(startTimer);
-        alert('GAME OVER');
-        // endGame();
-    }
+        document.getElementById('timer-display').innerHTML = seconds + ' Seconds';
+        if (seconds <= 0) {
+            clearInterval(timer);
+            // console.log("Time is up!")
+            endGame()
+        }
+    }, 1000);
 }
 
 function startGame() {
     document.getElementById('start-tab').setAttribute('class', 'hide');
-    document.getElementById('question-box').removeAttribute('class','hide');
-    setInterval(startTimer, 1000);
+    document.getElementById('question-box').setAttribute('class', 'container border border-dark rounded pop-box');
+    startTimer();
     hiScore.innerText = 'none';
     yourScore.innerText = score;
     renderQuestion()
@@ -233,8 +237,7 @@ function renderQuestion() {
         for (var i = 0; i <= ans.length - 1; i++) {
             var ansBtn = document.createElement('button')
             ansBtn.innerText = ans[i].text;
-            ansBtn.setAttribute('class', 'btn');
-            ansBtn.setAttribute('class', 'btn-primary');
+            ansBtn.setAttribute('class', 'btn btn-primary btn-lg  btn-block');
             ansBtn.setAttribute('value', ans[i].correct);
             answerDiv.addEventListener('click', checkAnswer)
             answerDiv.appendChild(ansBtn);
@@ -265,9 +268,21 @@ function checkAnswer(event) {
 }
 
 function endGame() {
-    
+    document.getElementById('question-box').setAttribute('class', 'hide');
+    document.getElementById('record-score').setAttribute('class', 'container pop-box')    
 }
+recordYourScore.addEventListener('click', function(event){
+    event.preventDefault();
+    console.log(playerInitials.innerText)
+    // sessionStorage.setItem('final', )
+})
 
+// function highScores(event) {
+//     event.preventDefault();
+//     console.log(score)
+    // var finalScore = JSON.stringify(score)
+    // sessionStorage.setItem('final', )
+// }
 
 // Set up timer set at 60 seconds for quiz
 // Set up score display
