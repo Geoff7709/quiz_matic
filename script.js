@@ -178,7 +178,7 @@ var questions = [
         {text: 'Unicorn', correct: true}
     ]},  
 ]
-var usedQuestions = []
+var usedQuestions = [];
 
 var startBtn = document.getElementById('start-button');
 
@@ -186,7 +186,7 @@ var questionDisplayed = document.getElementById('question');
 
 var answerDiv = document.getElementById('answers');
 
-var passBtn = document.getElementById('pass')
+var passBtn = document.getElementById('pass');
 
 var timer = document.getElementById('timer');
 
@@ -194,11 +194,13 @@ var seconds = 60;
 
 var hiScore = document.getElementById('hi-score');
 
+var highScore;
+
 var yourScore = document.getElementById('your-score');
 
-var recordYourScore = document.getElementById('submit-score')
+var recordYourScore = document.getElementById('submit-score');
 
-var playerInitials = document.getElementById('player-initials')
+var playerInitials = document.getElementById('player-initials');
 
 var score = 0;
 
@@ -218,7 +220,7 @@ function startGame() {
     document.getElementById('start-tab').setAttribute('class', 'hide');
     document.getElementById('question-box').setAttribute('class', 'container border border-dark rounded pop-box');
     startTimer();
-    hiScore.innerText = 'none';
+    hiScore.innerText = highScore || 'none';
     yourScore.innerText = score;
     renderQuestion()
 }
@@ -273,9 +275,10 @@ function endGame() {
 }
 recordYourScore.addEventListener('click', function(event){
     event.preventDefault();
-    var finalScore = JSON.stringify(score);
+    var finalPost = {name: playerInitials.value, score: score}
     // console.log(typeof score)
-    localStorage.setItem('final', playerInitials.value + ': ' + finalScore)
+    localStorage.setItem('final', JSON.stringify(finalPost))
+    console.log(localStorage.getItem('final', finalPost))
 })
 
 // function highScores(event) {
