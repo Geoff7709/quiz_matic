@@ -194,7 +194,7 @@ var seconds = 60;
 
 var hiScore = document.getElementById('hi-score');
 
-var highScore;
+var highScore = [];
 
 var yourScore = document.getElementById('your-score');
 
@@ -215,12 +215,12 @@ function startTimer() {
         }
     }, 1000);
 }
-
+// console.log(highScore);
 function startGame() {
     document.getElementById('start-tab').setAttribute('class', 'hide');
     document.getElementById('question-box').setAttribute('class', 'container border border-dark rounded pop-box');
     startTimer();
-    hiScore.innerText = highScore || 'none';
+    hiScore.innerText = highScore;
     yourScore.innerText = score;
     renderQuestion()
 }
@@ -275,12 +275,21 @@ function endGame() {
 }
 recordYourScore.addEventListener('click', function(event){
     event.preventDefault();
-    var finalPost = {name: playerInitials.value, score: score}
+    var finalPost = {name: playerInitials.value, score: score};
     // console.log(typeof score)
-    localStorage.setItem('final', JSON.stringify(finalPost))
-    console.log(localStorage.getItem('final', finalPost))
+    localStorage.setItem('final', JSON.stringify(finalPost));
+    var newScore = JSON.parse(localStorage.getItem('final', finalPost));
+    highScore.push(newScore);
+    resetGame();
 })
-
+function resetGame() {
+    seconds = 60;
+    document.getElementById('record-score').setAttribute('class', 'hide');
+    document.getElementById('start-tab').setAttribute('class', 'container');
+    hiScore.innerText = highScore;
+    document.getElementById('timer-display').innerHTML = seconds + ' Seconds';
+    
+}
 // function highScores(event) {
 //     event.preventDefault();
 //     console.log(score)
