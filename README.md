@@ -16,25 +16,23 @@
 
 ## Description
 
-The Google Book Search is a full stack MERN application utilizing the Google Book API to search queries and mongoose to store selections server side for future reference.
+Coding quiz application using local storage and vanilla JavaScript to test the user's knowledge of basic HTML, CSS, and JavaScript concepts. Used to explore local storage use and HTML manipulation.
 ## Usage
 
 Navigate to the [deployed website](https://geoff7709.github.io/quiz_matic/) and follow the prompts in the app:
-![usage video](./gbs_images/book_search.gif)
+![usage video](./qm_images/app_animation.gif)
 
 ## Technologies
 
 This application utilizes:
 * HTML, CSS and Javascript
-* React
-* MongoDB with Mongoose
-* ExpressJS with Node
+* Local Storage
 
 ## Contributing
   Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.
   [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
   ## Questions
-  [GitHub Repository](https://github.com/Geoff7709/google_book_search)
+  [GitHub Repository](https://github.com/Geoff7709/quiz_matic)
 
   For further questions please feel free to email the developers:
 
