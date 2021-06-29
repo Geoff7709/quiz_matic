@@ -192,7 +192,7 @@ var seconds = 60;
 
 var hiScore = document.getElementById('hi-score');
 
-var highScore = [];
+var highScore = localStorage.final ? JSON.parse(localStorage.getItem('final')) : {name: '', score: 0};
 
 var yourScore = document.getElementById('your-score');
 
@@ -201,6 +201,12 @@ var recordYourScore = document.getElementById('submit-score');
 var playerInitials = document.getElementById('player-initials');
 
 var score = 0;
+
+function setHiScore() {
+    hiScore.innerText = highScore.name + ": " + highScore.score;
+}
+
+setHiScore()
 
 function startTimer() {
     var timer = setInterval(function(){
@@ -216,7 +222,7 @@ function startGame() {
     document.getElementById('start-tab').setAttribute('class', 'hide');
     document.getElementById('question-box').setAttribute('class', 'container border border-dark rounded pop-box');
     startTimer();
-    hiScore.innerText = highScore;
+    hiScore.innerText = highScore.name + ": " + highScore.score;
     yourScore.innerText = score;
     renderQuestion()
 }
@@ -265,27 +271,27 @@ function endGame() {
 recordYourScore.addEventListener('click', function(event){
     event.preventDefault();
     var finalPost = {name: playerInitials.value, score: score};
-    // console.log(typeof score)
-    localStorage.setItem('final',  JSON.stringify(finalPost));
-    // var newScore = JSON.parse(localStorage.getItem(JSON.stringify(finalPost.name), JSON.stringify(finalPost.score)));
-    // console.log(newScore)
-    highScore.push(finalPost);
-    resetGame();
+    var presentHi = JSON.parse(localStorage.getItem('final'))
+    if (presentHi === null) {
+        localStorage.setItem('final',  JSON.stringify(finalPost));
+        resetGame()
+    } else if (finalPost.score > presentHi.score) {
+        localStorage.setItem('final',  JSON.stringify(finalPost));
+        resetGame();
+    } else {
+        resetGame()
+    }
 })
 function resetGame() {
+    highScore = JSON.parse(localStorage.getItem('final'))
     seconds = 60;
     document.getElementById('record-score').setAttribute('class', 'hide');
     document.getElementById('start-tab').setAttribute('class', 'container');
-    hiScore.innerText = highScore[0].name + ": " + highScore[0].score;
+    hiScore.innerText = highScore.name + ": " + highScore.score;
     document.getElementById('timer-display').innerHTML = seconds + ' Seconds';
-    
+    score = 0
 }
-// function highScores(event) {
-//     event.preventDefault();
-//     console.log(score)
-    // var finalScore = JSON.stringify(score)
-    // sessionStorage.setItem('final', )
-// }
+
 
 
 // Conditions for bonus - can pass and only lose time spent - if correct you gain twenty points plus fifteen seconds on the clock. Else double time is removed from timer.
