@@ -245,7 +245,9 @@ function renderQuestion() {
             ansBtn.setAttribute('value', ans[i].correct);
             answerDiv.addEventListener('click', checkAnswer)
             answerDiv.appendChild(ansBtn);
-        }    
+        }   
+    } else {
+        renderQuestion()
     } 
 }
 
@@ -283,6 +285,7 @@ recordYourScore.addEventListener('click', function(event){
 function resetGame() {
     highScore = JSON.parse(localStorage.getItem('final'))
     seconds = 60;
+    usedQuestions = []
     document.getElementById('record-score').setAttribute('class', 'hide');
     document.getElementById('start-tab').setAttribute('class', 'container');
     hiScore.innerText = highScore.name + ": " + highScore.score;
