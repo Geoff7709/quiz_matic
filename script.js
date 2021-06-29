@@ -1,5 +1,3 @@
-// Create Quiz-Matic game
-// Declare variables for questions/answers/buttons etc.
 var questions = [
     {question: 'What does ‘HTML’ stand for?', 
     bonus: false,
@@ -32,7 +30,7 @@ var questions = [
     bonus: false,
     order: 4,
     answer: [
-        {text: 'It adds, subtracts, multiplies, or divides numbers', correct: true},
+        {text: 'It adds, subtracts, multiplies, or divides numbers', correct: false},
         {text: 'It helps navigate through a document', correct: false},
         {text: 'It does your taxes', correct: false},
         {text: 'It executes the block of code defined', correct: true}
@@ -210,12 +208,10 @@ function startTimer() {
         document.getElementById('timer-display').innerHTML = seconds + ' Seconds';
         if (seconds <= 0) {
             clearInterval(timer);
-            // console.log("Time is up!")
             endGame()
         }
     }, 1000);
 }
-// console.log(highScore);
 function startGame() {
     document.getElementById('start-tab').setAttribute('class', 'hide');
     document.getElementById('question-box').setAttribute('class', 'container border border-dark rounded pop-box');
@@ -252,19 +248,12 @@ function renderQuestion() {
 function checkAnswer(event) {
     if (event.target.matches('button')) {
         var choice = event.target.value;
-        // console.log(typeof event.target.value)
         if (choice == 'true') {
-            // console.log('test')
-            // document.querySelector('body').setAttribute('class', 'correct');
             yourScore.innerText = score += 10;
-            // if (!usedQuestions.length === 20 && timer > 0) {
-                renderQuestion()
-            // }
+            renderQuestion()
         } else {
             seconds -= 10;
-        //     if (!usedQuestions.length === 20 && timer > 0) {
-                renderQuestion()
-        //     }
+            renderQuestion()
         }
     }
 }
@@ -277,16 +266,17 @@ recordYourScore.addEventListener('click', function(event){
     event.preventDefault();
     var finalPost = {name: playerInitials.value, score: score};
     // console.log(typeof score)
-    localStorage.setItem('final', JSON.stringify(finalPost));
-    var newScore = JSON.parse(localStorage.getItem('final', finalPost));
-    highScore.push(newScore);
+    localStorage.setItem('final',  JSON.stringify(finalPost));
+    // var newScore = JSON.parse(localStorage.getItem(JSON.stringify(finalPost.name), JSON.stringify(finalPost.score)));
+    // console.log(newScore)
+    highScore.push(finalPost);
     resetGame();
 })
 function resetGame() {
     seconds = 60;
     document.getElementById('record-score').setAttribute('class', 'hide');
     document.getElementById('start-tab').setAttribute('class', 'container');
-    hiScore.innerText = highScore;
+    hiScore.innerText = highScore[0].name + ": " + highScore[0].score;
     document.getElementById('timer-display').innerHTML = seconds + ' Seconds';
     
 }
@@ -297,10 +287,6 @@ function resetGame() {
     // sessionStorage.setItem('final', )
 // }
 
-// Set up timer set at 60 seconds for quiz
-// Set up score display
-// Question display block will have a simple statement of rules until start
-// Start play includes start timer and display first question - will be randomly selected from bank of twenty questions plus four bonus questions
-// Player selects answer with click function - if correct add to score. Each question will be worth ten points. Else answer is wrong, time is subtracted from amount.
+
 // Conditions for bonus - can pass and only lose time spent - if correct you gain twenty points plus fifteen seconds on the clock. Else double time is removed from timer.
 // Timer reaches zero game ends, player is asked for initials to save score to high scores list
