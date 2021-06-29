@@ -246,9 +246,7 @@ function renderQuestion() {
             answerDiv.addEventListener('click', checkAnswer)
             answerDiv.appendChild(ansBtn);
         }    
-    } else {
-        renderQuestion()
-    }
+    } 
 }
 
 function checkAnswer(event) {
