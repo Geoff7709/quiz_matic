@@ -143,37 +143,37 @@ var questions = [
     bonus: true,
     order: 17,
     answer: [
-        {text: 'African or European?', correct: true},
-        {text: 'I don’t know', correct: false},
-        {text: 'Red, no blue', correct: false},
-        {text: 'Nee', correct: false}
+        {text: 'African or European?', correct: 'bonus'},
+        {text: 'I don’t know', correct: 'wrong'},
+        {text: 'Red, no blue', correct: 'wrong'},
+        {text: 'Nee', correct: 'wrong'}
     ]},
     {question: ' What is the only animal with four knees?',
     bonus: true,
     order: 18,
     answer: [
-        {text: 'Lemur', correct: false},
-        {text: 'Duckbill Platypus', correct: false},
-        {text: 'Elephant', correct: true},
-        {text: 'My third cousin', correct: false}
+        {text: 'Lemur', correct: 'wrong'},
+        {text: 'Duckbill Platypus', correct: 'wrong'},
+        {text: 'Elephant', correct: 'bonus'},
+        {text: 'My third cousin', correct: 'wrong'}
     ]},
     {question: 'What is the weight of the average humpback whale heart?',
     bonus: true,
     order: 19,
     answer: [
-        {text: '430 lbs', correct: true},
-        {text: '50 lbs', correct: false},
-        {text: 'This is the only mammal without a heart –their blood is pumped through body motion', correct: false},
-        {text: 'A Volvo', correct: false}
+        {text: '430 lbs', correct: 'bonus'},
+        {text: '50 lbs', correct: 'wrong'},
+        {text: 'This is the only mammal without a heart –their blood is pumped through body motion', correct: 'wrong'},
+        {text: 'A Volvo', correct: 'wrong'}
     ]},
     {question: 'What is the national animal of Scottland?',
     bonus: true,
     order: 20,
     answer: [
-        {text: 'Badger', correct: false},
-        {text: 'Red Deer', correct: false},
-        {text: 'Scottish Wildcat', correct: false},
-        {text: 'Unicorn', correct: true}
+        {text: 'Badger', correct: 'wrong'},
+        {text: 'Red Deer', correct: 'wrong'},
+        {text: 'Scottish Wildcat', correct: 'wrong'},
+        {text: 'Unicorn', correct: 'bonus'}
     ]},  
 ]
 var usedQuestions = [];
@@ -184,7 +184,7 @@ var questionDisplayed = document.getElementById('question');
 
 var answerDiv = document.getElementById('answers');
 
-var passBtn = document.getElementById('pass');
+var passBtn = document.getElementById('passBtn');
 
 var timer = document.getElementById('timer');
 
@@ -245,10 +245,22 @@ function renderQuestion() {
             ansBtn.setAttribute('value', ans[i].correct);
             answerDiv.addEventListener('click', checkAnswer)
             answerDiv.appendChild(ansBtn);
-        }   
+        }
+        if (q.bonus === true) {
+            passBtn.setAttribute('class', 'btn btn-danger btn-lg btn-block');
+            passBtn.setAttribute('value', 'pass')
+        }  
     } else {
         renderQuestion()
     } 
+}
+
+passBtn.addEventListener('click', pass)
+
+function pass() {
+    seconds -= 10
+    passBtn.setAttribute('class', 'hide')
+    renderQuestion() 
 }
 
 function checkAnswer(event) {
@@ -256,9 +268,24 @@ function checkAnswer(event) {
         var choice = event.target.value;
         if (choice == 'true') {
             yourScore.innerText = score += 10;
+            passBtn.setAttribute('class', 'hide')
+            renderQuestion()
+        } else if (choice == 'pass') {
+            seconds -= 10
+            passBtn.setAttribute('class', 'hide')
+            renderQuestion()
+        } else if (choice == 'bonus') {
+            seconds += 5
+            yourScore.innerText = score += 15
+            passBtn.setAttribute('class', 'hide')
+            renderQuestion()
+        } else if (choice == 'wrong') {
+            seconds -= 15
+            passBtn.setAttribute('class', 'hide')
             renderQuestion()
         } else {
             seconds -= 10;
+            passBtn.setAttribute('class', 'hide')
             renderQuestion()
         }
     }
