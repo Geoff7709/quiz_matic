@@ -319,8 +319,3 @@ function resetGame() {
     document.getElementById('timer-display').innerHTML = seconds + ' Seconds';
     score = 0
 }
-
-
-
-// Conditions for bonus - can pass and only lose time spent - if correct you gain twenty points plus fifteen seconds on the clock. Else double time is removed from timer.
-// Timer reaches zero game ends, player is asked for initials to save score to high scores list
